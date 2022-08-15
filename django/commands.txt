@@ -1,0 +1,38 @@
+py manage.py makemigrations --dry-run --verbosity 3
+py manage.py runserver
+py manage.py createsuperuser 
+pip install coverage
+coverage run --omit='*/venv/*' manage.py test
+coverage html
+pip install djangorestframework
+
+Part#1
+docker build --tag django-docker .
+docker run --publish 8000:8000 django-docker
+
+Part#2
+docker-compose build
+docker-compose run --rm app django-admin startproject core.
+docker-compose up
+
+Part#3
+docker-compose build
+docker-compose run --rm app django-admin startproject core .
+docker-compose up
+docker exec -it django-docker /bin/bash
+
+Part#4
+docker-compose run django_docker_container sh -c "django-admin startapp newapp ."
+docker exec -it django_docker_container sh
+
+#Run Celery Task
+  python manage.py shell
+  from newapp.tasks import add
+  add.delay(2, 2)
+
+Info:
+PYTHONUNBUFFERED:
+Setting the non-empty value of PYTHONUNBUFFERED means 
+that the python output is transmitted directly to the 
+terminal without being buffered and that allows displaying 
+the application’s output in real-time.
